@@ -1,0 +1,973 @@
+{
+"services": [
+{
+"code": "opt0",
+"name": "myopinions & erewards"
+},
+{
+"code": "opt1",
+"name": "Google (YouTube, Gmail)"
+},
+{
+"code": "opt2",
+"name": "Facebook"
+},
+{
+"code": "opt3",
+"name": "Parimatch"
+},
+{
+"code": "opt6",
+"name": "Fiverr"
+},
+{
+"code": "opt7",
+"name": "MS Office 365"
+},
+{
+"code": "opt8",
+"name": "LinkedIn"
+},
+{
+"code": "opt9",
+"name": "T1nder"
+},
+{
+"code": "opt10",
+"name": "AOL"
+},
+{
+"code": "opt11",
+"name": "Viber"
+},
+{
+"code": "opt15",
+"name": "Microsoft (Azure, Bing, Skype, etc)"
+},
+{
+"code": "opt16",
+"name": "Instagram (+Threads)"
+},
+{
+"code": "opt17",
+"name": "bet365"
+},
+{
+"code": "opt19",
+"name": "OTHER (no guarantee)"
+},
+{
+"code": "opt20",
+"name": "WhatsAPP"
+},
+{
+"code": "opt21",
+"name": "EasyPay"
+},
+{
+"code": "opt22",
+"name": "888casino"
+},
+{
+"code": "opt24",
+"name": "WebMoney&ENUM"
+},
+{
+"code": "opt25",
+"name": "BetFair"
+},
+{
+"code": "opt26",
+"name": "CrigslistApp"
+},
+{
+"code": "opt29",
+"name": "Telegram"
+},
+{
+"code": "opt30",
+"name": "GrabTaxi"
+},
+{
+"code": "opt34",
+"name": "Tencent QQ"
+},
+{
+"code": "opt35",
+"name": "GetTaxi"
+},
+{
+"code": "opt37",
+"name": "Line Messenger"
+},
+{
+"code": "opt38",
+"name": "Sisal"
+},
+{
+"code": "opt39",
+"name": "Verse"
+},
+{
+"code": "opt40",
+"name": "Doordash"
+},
+{
+"code": "opt41",
+"name": "X (Twitter)"
+},
+{
+"code": "opt42",
+"name": "LiveScore"
+},
+{
+"code": "opt43",
+"name": "FastMail"
+},
+{
+"code": "opt44",
+"name": "Amazon"
+},
+{
+"code": "opt45",
+"name": "Discord"
+},
+{
+"code": "opt46",
+"name": "Airbnb"
+},
+{
+"code": "opt47",
+"name": "MoneyLion"
+},
+{
+"code": "opt48",
+"name": "Shopee"
+},
+{
+"code": "opt49",
+"name": "Skout"
+},
+{
+"code": "opt52",
+"name": "Ticketmaster"
+},
+{
+"code": "opt53",
+"name": "Deliveroo"
+},
+{
+"code": "opt54",
+"name": "Weebly"
+},
+{
+"code": "opt55",
+"name": "ifood"
+},
+{
+"code": "opt56",
+"name": "Badoo"
+},
+{
+"code": "opt57",
+"name": "Proton Mail"
+},
+{
+"code": "opt58",
+"name": "Steam"
+},
+{
+"code": "opt60",
+"name": "Lazada"
+},
+{
+"code": "opt61",
+"name": "Alibaba (Taobao, 1688.com)"
+},
+{
+"code": "opt65",
+"name": "Yahoo"
+},
+{
+"code": "opt66",
+"name": "Twilio"
+},
+{
+"code": "opt67",
+"name": "WeChat"
+},
+{
+"code": "opt68",
+"name": "G2A.COM"
+},
+{
+"code": "opt70",
+"name": "OLX"
+},
+{
+"code": "opt71",
+"name": "KakaoTalk"
+},
+{
+"code": "opt72",
+"name": "Uber"
+},
+{
+"code": "opt73",
+"name": "Naver"
+},
+{
+"code": "opt75",
+"name": "Lyft"
+},
+{
+"code": "opt77",
+"name": "Gameflip"
+},
+{
+"code": "opt78",
+"name": "Blizzard"
+},
+{
+"code": "opt81",
+"name": "Bolt"
+},
+{
+"code": "opt82",
+"name": "Tango"
+},
+{
+"code": "opt83",
+"name": "PayPal + Ebay"
+},
+{
+"code": "opt84",
+"name": "P0F"
+},
+{
+"code": "opt85",
+"name": "giocodigitale.it"
+},
+{
+"code": "opt86",
+"name": "Adidas & Nike"
+},
+{
+"code": "opt88",
+"name": "Yalla.live"
+},
+{
+"code": "opt89",
+"name": "Careem"
+},
+{
+"code": "opt90",
+"name": "Snapchat"
+},
+{
+"code": "opt91",
+"name": "Wise"
+},
+{
+"code": "opt92",
+"name": "DiDi"
+},
+{
+"code": "opt93",
+"name": "Zoho"
+},
+{
+"code": "opt94",
+"name": "JD.com"
+},
+{
+"code": "opt95",
+"name": "NetBet"
+},
+{
+"code": "opt96",
+"name": "MiChat"
+},
+{
+"code": "opt98",
+"name": "Clubhouse"
+},
+{
+"code": "opt101",
+"name": "Netflix"
+},
+{
+"code": "opt104",
+"name": "TikTok"
+},
+{
+"code": "opt107",
+"name": "Prom.UA"
+},
+{
+"code": "opt108",
+"name": "Glovo & Raketa"
+},
+{
+"code": "opt109",
+"name": "Paddy Power"
+},
+{
+"code": "opt110",
+"name": "Grindr"
+},
+{
+"code": "opt111",
+"name": "IMO"
+},
+{
+"code": "opt112",
+"name": "CoinBase"
+},
+{
+"code": "opt113",
+"name": "OfferUp"
+},
+{
+"code": "opt114",
+"name": "Locanto.com"
+},
+{
+"code": "opt115",
+"name": "foodpanda"
+},
+{
+"code": "opt118",
+"name": "Inboxdollars"
+},
+{
+"code": "opt420",
+"name": "Grailed"
+},
+{
+"code": "opt119",
+"name": "Nico"
+},
+{
+"code": "opt120",
+"name": "H1nge"
+},
+{
+"code": "opt122",
+"name": "Paysafecard"
+},
+{
+"code": "opt123",
+"name": "Whoosh"
+},
+{
+"code": "opt106",
+"name": "Wing Money"
+},
+{
+"code": "opt125",
+"name": "Swagbucks"
+},
+{
+"code": "opt127",
+"name": "Signal"
+},
+{
+"code": "opt129",
+"name": "kwiff.com"
+},
+{
+"code": "opt130",
+"name": "Vinted"
+},
+{
+"code": "opt131",
+"name": "Apple"
+},
+{
+"code": "opt132",
+"name": "OpenAI API (chatGPT, DALL-e 2)"
+},
+{
+"code": "opt133",
+"name": "Revolut"
+},
+{
+"code": "opt134",
+"name": "Schibsted-konto"
+},
+{
+"code": "opt136",
+"name": "dundle"
+},
+{
+"code": "opt137",
+"name": "bwin"
+},
+{
+"code": "opt138",
+"name": "Bazos.sk"
+},
+{
+"code": "opt140",
+"name": "Google Voice"
+},
+{
+"code": "opt146",
+"name": "subito.it"
+},
+{
+"code": "opt141",
+"name": "EUROBET"
+},
+{
+"code": "opt143",
+"name": "autocosmos.com"
+},
+{
+"code": "opt144",
+"name": "hopper"
+},
+{
+"code": "opt147",
+"name": "VooV Meeting"
+},
+{
+"code": "opt28",
+"name": "Gamers set (offgamers.com, G2A.com, seagm.com)"
+},
+{
+"code": "opt145",
+"name": "bumble"
+},
+{
+"code": "opt148",
+"name": "casa.it"
+},
+{
+"code": "opt142",
+"name": "funpay"
+},
+{
+"code": "opt150",
+"name": "Czech email services"
+},
+{
+"code": "opt151",
+"name": "novibet.com"
+},
+{
+"code": "opt152",
+"name": "kleinanzeigen.de"
+},
+{
+"code": "opt165",
+"name": "idealista.com"
+},
+{
+"code": "opt167",
+"name": "inbox.lv"
+},
+{
+"code": "opt171",
+"name": "Marktplaats"
+},
+{
+"code": "opt163",
+"name": "Wolt"
+},
+{
+"code": "opt158",
+"name": "Zalo"
+},
+{
+"code": "opt166",
+"name": "HUAWEI"
+},
+{
+"code": "opt155",
+"name": "Happn"
+},
+{
+"code": "opt164",
+"name": "Leboncoin"
+},
+{
+"code": "opt156",
+"name": "mobileDE"
+},
+{
+"code": "opt162",
+"name": "Payoneer"
+},
+{
+"code": "opt157",
+"name": "CupidMedia"
+},
+{
+"code": "opt159",
+"name": "Feeld"
+},
+{
+"code": "opt153",
+"name": "ROOMSTER"
+},
+{
+"code": "opt170",
+"name": "Royal Canin"
+},
+{
+"code": "opt172",
+"name": "WEB.DE"
+},
+{
+"code": "opt173",
+"name": "X World Wallet"
+},
+{
+"code": "opt174",
+"name": "Samsung"
+},
+{
+"code": "opt176",
+"name": "ChoTot"
+},
+{
+"code": "opt177",
+"name": "NHNcorp (강남언니)"
+},
+{
+"code": "opt178",
+"name": "VonageVF"
+},
+{
+"code": "opt179",
+"name": "GetsBet.ro"
+},
+{
+"code": "opt180",
+"name": "Lalamove"
+},
+{
+"code": "opt182",
+"name": "LAPOSTE"
+},
+{
+"code": "opt183",
+"name": "PAYSEND"
+},
+{
+"code": "opt184",
+"name": "MOMO"
+},
+{
+"code": "opt188",
+"name": "GGbet"
+},
+{
+"code": "opt189",
+"name": "foodora"
+},
+{
+"code": "opt190",
+"name": "SNKRDUNK"
+},
+{
+"code": "opt191",
+"name": "TopCashback"
+},
+{
+"code": "opt192",
+"name": "Betano (all countries)"
+},
+{
+"code": "opt193",
+"name": "Ipsos"
+},
+{
+"code": "opt194",
+"name": "ZoomInfo"
+},
+{
+"code": "opt195",
+"name": "Lajumate.ro"
+},
+{
+"code": "opt196",
+"name": "Claude (Anthropic)"
+},
+{
+"code": "opt197",
+"name": "MPSellers"
+},
+{
+"code": "opt198",
+"name": "Nectar"
+},
+{
+"code": "opt200",
+"name": "ENEBA"
+},
+{
+"code": "opt201",
+"name": "Casino Plus"
+},
+{
+"code": "opt203",
+"name": "HelloTalk"
+},
+{
+"code": "opt205",
+"name": "Twitch"
+},
+{
+"code": "opt206",
+"name": "WalletHub"
+},
+{
+"code": "opt207",
+"name": "Publi24"
+},
+{
+"code": "opt208",
+"name": "WooPlus"
+},
+{
+"code": "opt209",
+"name": "BANDUS"
+},
+{
+"code": "opt211",
+"name": "MrGreen"
+},
+{
+"code": "opt212",
+"name": "OurTime"
+},
+{
+"code": "opt213",
+"name": "Waitomo"
+},
+{
+"code": "opt214",
+"name": "Cashrewards"
+},
+{
+"code": "opt215",
+"name": "Fbet"
+},
+{
+"code": "opt216",
+"name": "Hey"
+},
+{
+"code": "opt217",
+"name": "Brevo"
+},
+{
+"code": "opt218",
+"name": "TransferGo"
+},
+{
+"code": "opt220",
+"name": "TOTOGAMING"
+},
+{
+"code": "opt221",
+"name": "Fortuna"
+},
+{
+"code": "opt222",
+"name": "LASVEGAS.RO"
+},
+{
+"code": "opt223",
+"name": "Betmgm"
+},
+{
+"code": "opt224",
+"name": "22bet"
+},
+{
+"code": "opt225",
+"name": "Zasilkovna"
+},
+{
+"code": "opt227",
+"name": "Walmart"
+},
+{
+"code": "opt228",
+"name": "OKX"
+},
+{
+"code": "opt229",
+"name": "GGPokerUK"
+},
+{
+"code": "opt230",
+"name": "OkCupᎥd"
+},
+{
+"code": "opt231",
+"name": "Whatnot"
+},
+{
+"code": "opt232",
+"name": "DistroKid"
+},
+{
+"code": "opt236",
+"name": "Year13"
+},
+{
+"code": "opt237",
+"name": "Bitpanda"
+},
+{
+"code": "opt238",
+"name": "hepsiburada"
+},
+{
+"code": "opt239",
+"name": "Taptap"
+},
+{
+"code": "opt240",
+"name": "goldbet.it"
+},
+{
+"code": "opt241",
+"name": "onet.pl (Onet Konto)"
+},
+{
+"code": "opt242",
+"name": "Abbott"
+},
+{
+"code": "opt243",
+"name": "IQOS"
+},
+{
+"code": "opt244",
+"name": "Truth Social"
+},
+{
+"code": "opt245",
+"name": "Linode"
+},
+{
+"code": "opt246",
+"name": "Outlier"
+},
+{
+"code": "opt247",
+"name": "RadQuest"
+},
+{
+"code": "opt248",
+"name": "ESX (abonamentesali.ro)"
+},
+{
+"code": "opt249",
+"name": "Superbet"
+},
+{
+"code": "opt250",
+"name": "Match"
+},
+{
+"code": "opt252",
+"name": "Best Buy"
+},
+{
+"code": "opt253",
+"name": "Zoosk"
+},
+{
+"code": "opt254",
+"name": "Monster Energy"
+},
+{
+"code": "opt255",
+"name": "Casa Pariurilor"
+},
+{
+"code": "opt256",
+"name": "Astropay"
+},
+{
+"code": "opt257",
+"name": "Remitly"
+},
+{
+"code": "opt258",
+"name": "SumUp"
+},
+{
+"code": "opt259",
+"name": "Google Messenger"
+},
+{
+"code": "opt260",
+"name": "Parions Sport"
+},
+{
+"code": "opt262",
+"name": "BC GAME"
+},
+{
+"code": "opt263",
+"name": "Profee.com"
+},
+{
+"code": "opt264",
+"name": "Toloka.ai"
+},
+{
+"code": "opt265",
+"name": "Reddit"
+},
+{
+"code": "opt266",
+"name": "Capital One Shopping"
+},
+{
+"code": "opt267",
+"name": "Caliente"
+},
+{
+"code": "opt269",
+"name": "Neosurf"
+},
+{
+"code": "opt270",
+"name": "Skelbiu"
+},
+{
+"code": "opt271",
+"name": "Google Chat"
+},
+{
+"code": "opt272",
+"name": "American Airlines"
+},
+{
+"code": "opt273",
+"name": "pamestoixima"
+},
+{
+"code": "opt274",
+"name": "Emag.ro"
+},
+{
+"code": "opt275",
+"name": "SkyBet"
+},
+{
+"code": "opt276",
+"name": "PartyCasino"
+},
+{
+"code": "opt277",
+"name": "Betfred"
+},
+{
+"code": "opt278",
+"name": "Champion"
+}
+],
+"countries": [
+"UK",
+"US",
+"FR",
+"DE",
+"ES",
+"IT",
+"AU",
+"MX",
+"BR",
+"PH",
+"ID",
+"JP",
+"RO",
+"PT",
+"CA",
+"TD",
+"AR",
+"PL",
+"GR",
+"AL",
+"AT",
+"BD",
+"BE",
+"BO",
+"BA",
+"BG",
+"KH",
+"CM",
+"CL",
+"CO",
+"CR",
+"HR",
+"CY",
+"CZ",
+"DK",
+"DO",
+"EE",
+"FI",
+"GE",
+"GI",
+"HK",
+"HU",
+"IE",
+"IL",
+"KZ",
+"KE",
+"KG",
+"LV",
+"LT",
+"MK",
+"MY",
+"MT",
+"MD",
+"MA",
+"NL",
+"NZ",
+"PK",
+"PY",
+"RS",
+"SG",
+"SK",
+"SI",
+"ZA",
+"SE",
+"CH",
+"TZ",
+"TH",
+"UA",
+"VN"
+],
+"top": [
+"opt20",
+"opt29",
+"opt19",
+"opt1",
+"opt2",
+"opt130",
+"opt6",
+"opt16",
+"opt52",
+"opt127",
+"opt9",
+"opt104",
+"opt275",
+"opt277",
+"opt83",
+"opt109",
+"opt131",
+"opt25"
+],
+"source": "https://smspva.com/",
+"fetched": "2026-11-03T14:35:54"
+}

@@ -1,0 +1,6 @@
+tmp/
+__pycache__/
+*.pyc
+orders.jsonl
+.DS_Store
+.env
