@@ -106,7 +106,7 @@
   .pill.bal { background:linear-gradient(var(--panel), var(--panel)) padding-box, linear-gradient(135deg, var(--accent), var(--accent-2)) border-box; border-color:transparent; }
   .pill .dot { width:7px; height:7px; border-radius:99px; background:var(--ok); box-shadow:0 0 0 3px var(--ok-soft); }
   .tag { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:600; padding:2px 8px; border-radius:99px; background:var(--soft); color:var(--muted); letter-spacing:.01em; }
-  .tag.race { background:var(--warn-soft); color:var(--warn); }
+  .tag.batch { background:var(--warn-soft); color:var(--warn); }
   .tag.acc { background:var(--accent-soft); color:var(--accent); }
   .tgroup { display:flex; gap:2px; padding:2px; border:1px solid var(--line); border-radius:11px; background:var(--panel-2); }
   .tgroup button { border:none; box-shadow:none; background:transparent; height:28px; padding:0 9px; color:var(--muted); }
@@ -165,7 +165,49 @@
   .hero-acts { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px dashed var(--line); }
   .hero-acts .hint { font-size:12px; color:var(--muted); flex:1; min-width:240px; display:flex; gap:8px; align-items:flex-start; }
   .hero-acts .hint .i { margin-top:2px; color:var(--warn); }
-  #btnRace { padding:9px 16px; }
+  #btnOrder, #btnOrderAll { padding:9px 16px; }
+  /* tab service */
+  .stabs { position:sticky; top:-20px; z-index:6; margin:-20px -22px 16px; padding:12px 22px; display:flex; gap:6px; align-items:center;
+    background:color-mix(in oklab, var(--bg) 82%, transparent); backdrop-filter:blur(14px) saturate(1.4); -webkit-backdrop-filter:blur(14px) saturate(1.4);
+    border-bottom:1px solid var(--line-2); overflow-x:auto; scrollbar-width:none; }
+  .stabs::-webkit-scrollbar { display:none; }
+  .stab { display:inline-flex; align-items:center; gap:8px; flex:none; height:36px; padding:0 6px 0 6px; border-radius:11px; cursor:pointer;
+    border:1px solid var(--line); background:var(--panel); box-shadow:var(--shadow-sm); font-size:13px; font-weight:550; color:var(--muted);
+    transition:border-color .15s, color .15s, background .15s; user-select:none; max-width:240px; }
+  .stab:hover { color:var(--text); border-color:color-mix(in oklab, var(--accent) 40%, var(--line)); }
+  .stab.cur { color:var(--accent); border-color:var(--accent); background:var(--accent-soft); }
+  .stab .av { width:24px; height:24px; border-radius:7px; display:grid; place-items:center; font-size:12px; font-weight:700; flex:none;
+    background:var(--soft); color:var(--muted); }
+  .stab.cur .av { background:var(--accent); color:#fff; }
+  .stab .nm { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .stab .bd { font-size:10.5px; font-weight:700; min-width:18px; height:18px; padding:0 5px; border-radius:99px; display:inline-grid; place-items:center;
+    font-variant-numeric:tabular-nums; flex:none; }
+  .stab .bd.pk { background:var(--accent-soft); color:var(--accent); } .stab.cur .bd.pk { background:var(--panel); }
+  .stab .bd.wt { background:var(--warn-soft); color:var(--warn); }
+  .stab .bd.ok { background:var(--ok-soft); color:var(--ok); }
+  .stab kbd { font-size:10px; padding:2px 4px; }
+  .stab .cl { width:20px; height:20px; border-radius:6px; display:grid; place-items:center; color:var(--faint); flex:none; }
+  .stab .cl:hover { background:var(--soft); color:var(--bad); } .stab .cl .i { width:12px; height:12px; }
+  .stab-add { flex:none; height:36px; padding:0 12px; border-style:dashed; color:var(--muted); }
+  .stabs .hint { flex:none; margin-left:auto; padding-left:10px; font-size:11.5px; color:var(--faint); white-space:nowrap; }
+
+  /* bảng đã chọn */
+  #selTable tr.grp td { background:var(--panel-2); padding-top:8px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  #selTable tr.grp td:first-child { padding-left:10px; border-radius:10px 0 0 10px; }
+  #selTable tr.grp td:last-child { border-radius:0 10px 10px 0; }
+  #selTable tr.grp.cur td { background:var(--accent-soft); }
+  #selTable tr.grp .gname { display:flex; align-items:center; gap:8px; font-weight:650; }
+  #selTable tr.grp .gname .tag { font-weight:600; }
+  #selTable tr.grp .gacts { display:flex; gap:6px; justify-content:flex-end; }
+  #selTable td.c { padding-left:14px; }
+  #selTable .r { text-align:right; }
+  #selTable input.q { width:64px; padding:5px 6px 5px 10px; text-align:center; font-variant-numeric:tabular-nums; }
+  #selTable button.x { width:28px; height:28px; padding:0; color:var(--faint); }
+  #selTable button.x:hover { color:var(--bad); }
+  .selfoot { display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding-top:14px; }
+  .selfoot .tot { margin-right:auto; font-size:13px; color:var(--muted); } .selfoot .tot b { color:var(--text); font-variant-numeric:tabular-nums; }
+  .selfoot label { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); font-weight:600; }
+  .selfoot input { width:64px; padding:6px 6px 6px 10px; text-align:center; }
   #btnCheapest { padding:9px 14px; }
 
   /* orders */
@@ -246,7 +288,8 @@
   .gate-card h1 { margin:0 0 6px; font-size:22px; letter-spacing:-.02em; }
   .gate-card p { margin:0 0 20px; color:var(--muted); }
   .gate-card .row { display:flex; gap:8px; }
-  .gate-card input { flex:1; padding:11px 13px; }
+  .gate-card input { flex:1; padding:11px 13px 11px 36px; }
+  .gate-card .field svg.i { left:12px; }
   .gate-card .primary { padding:10px 18px; }
   .gate-feat { display:grid; gap:9px; margin-top:22px; padding-top:18px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
   .gate-feat div { display:flex; gap:10px; align-items:flex-start; } .gate-feat .i { color:var(--accent); margin-top:2px; }
@@ -316,7 +359,7 @@
 
 <header id="hdr" hidden>
   <div class="brand"><span class="logo"><svg class="i" style="stroke:#fff"><use href="#i-msg"/></svg></span>SMSPVA <span class="sub">Studio</span></div>
-  <button id="svcBtn" title="Chọn service (phím /)"><svg class="i"><use href="#i-search"/></svg><span id="svcName">Chọn service…</span><kbd>/</kbd></button>
+  <button id="svcBtn" title="Chọn service (phím /)"><svg class="i"><use href="#i-search"/></svg><span id="svcName">Chọn service…</span><kbd id="svcKbd">/</kbd></button>
   <div class="hstat">
     <span class="muted small" id="job"></span>
     <span class="tag acc" id="mode" title="Key kiểu cũ: dùng API priemnik.php. Danh sách service không có giá/kho tổng; chọn service để xem từng country."></span>
@@ -343,7 +386,7 @@
     <button class="sm ghost" id="btnKeyBack" hidden style="margin-top:-4px">← Quay lại dashboard</button>
     <div class="gate-feat">
       <div><svg class="i"><use href="#i-shield"/></svg><span>Key chỉ nằm trong RAM của server local (127.0.0.1) — không lưu ra đĩa.</span></div>
-      <div><svg class="i"><use href="#i-bolt"/></svg><span>Race nhiều country cùng lúc — số đầu tiên nhận SMS thắng, phần còn lại tự huỷ.</span></div>
+      <div><svg class="i"><use href="#i-bolt"/></svg><span>Order song song nhiều country × nhiều service cùng lúc — không tự huỷ số nào.</span></div>
       <div><svg class="i"><use href="#i-globe"/></svg><span>Hỗ trợ cả API v2 lẫn key kiểu cũ (priemnik.php).</span></div>
     </div>
   </div>
@@ -375,6 +418,7 @@
   </aside>
 
   <main><div class="wrap">
+    <div class="stabs" id="stabs" hidden></div>
     <div class="card hero" id="svcCard" hidden>
       <div class="hero-top">
         <div class="avatar" id="svcAvatar">?</div>
@@ -390,9 +434,24 @@
         </div>
       </div>
       <div class="hero-acts">
-        <button class="primary" id="btnRace">⚡ Race 0 country</button>
+        <button class="primary" id="btnOrder">Order 0 country</button>
         <button id="btnCheapest"><svg class="i"><use href="#i-cart"/></svg>Order 1 số rẻ nhất</button>
-        <span class="hint"><svg class="i"><use href="#i-bolt"/></svg><span>Race: order song song các country đã tick → số đầu tiên nhận SMS thắng, tự huỷ phần còn lại. Chỉ trả tiền số nhận SMS.</span></span>
+        <span class="hint"><svg class="i"><use href="#i-bolt"/></svg><span>Order song song các country đã tick — không tự huỷ số nào, số không cần thì tự bấm Huỷ. Tick được giữ khi đổi service → chọn ở nhiều service, xem & order tất cả ở bảng "Đã chọn".</span></span>
+      </div>
+    </div>
+
+    <div class="card" id="selCard" hidden>
+      <div class="card-h"><h2><svg class="i"><use href="#i-cart"/></svg>Đã chọn để order <span class="count" id="selCount">0</span></h2>
+        <span class="muted small" id="selInfo"></span></div>
+      <div class="scroll"><table id="selTable">
+        <thead><tr><th>Country</th><th class="r">Giá</th><th class="r">Số lượng</th><th class="r">Tạm tính</th><th></th></tr></thead>
+        <tbody id="selBody"></tbody>
+      </table></div>
+      <div class="selfoot">
+        <span class="tot" id="selTot"></span>
+        <label title="Đặt cùng số lượng cho mọi dòng">SL tất cả <input type="number" id="qtyAll" min="1" max="50" placeholder="—"></label>
+        <button class="sm ghost" id="btnUnpickAll"><svg class="i"><use href="#i-trash"/></svg>Bỏ hết</button>
+        <button class="primary" id="btnOrderAll">Order tất cả</button>
       </div>
     </div>
 
@@ -463,7 +522,11 @@ const TITLE = "SMSPVA Studio";
 
 let S = null, services = [], svc = null, selC = null;
 let svcCode = new URLSearchParams(location.search).get("service") || LS.get("service", null);  // bookmark: /?service=opt132
-let picked = new Set(), favs = new Set(LS.get("favs", ["opt132"])), seen = null, editKey = false;
+const picks = new Map();  // service -> Map(country -> {price, qty, name, dial}); giữ tick khi đổi service để order nhiều service song song
+let recent = LS.get("recent", []).filter(Boolean);   // tab service gần đây (mới nhất ở cuối thanh)
+const svcCache = new Map();                           // code -> chi tiết service, để chuyển tab hiện ngay
+const pickFor = code => { if (!picks.has(code)) picks.set(code, new Map()); return picks.get(code); };
+let picked = pickFor(svcCode), favs = new Set(LS.get("favs", ["opt132"])), seen = null, editKey = false;
 let cfg = Object.assign({ sound:true, notify:false, autocopy:true, sort:"best", only:true, ssort:"fav" }, LS.get("cfg", {}));
 let kbIdx = 0;
 
@@ -496,10 +559,9 @@ async function pollState() {
   $("balance").textContent = S.balance == null ? "—" : money(S.balance);
   $("karma").textContent = S.karma != null ? `· karma ${S.karma}` : "";
   $("mode").hidden = S.mode !== "legacy"; $("mode").textContent = "API cũ";
-  $("job").textContent = S.job ? `⏳ ${S.job}…` : "";
+  $("job").textContent = S.jobs ? `⏳ đang order ${S.jobs} lô…` : "";
   if (S.has_key && !services.length && !loadServices.busy) loadServices();
-  renderOrders();
-  if (svc) updateRaceBtn();
+  renderOrders(); renderTabs();
   const lg = $("log"), atEnd = lg.scrollTop + lg.clientHeight >= lg.scrollHeight - 30;
   lg.textContent = S.logs.join("\n"); if (atEnd) lg.scrollTop = lg.scrollHeight;
 }
@@ -539,7 +601,7 @@ function renderOrders() {
     return `<div class="oc ${o.status === "sms" ? "sms" : ""} ${dead ? "dead" : ""}" data-oid="${esc(o.id)}">
       <div class="oc-top"><span class="fl">${flag(o.country)}</span><b>${esc(o.country)}</b>
         <span class="sv">${esc(o.sname)}</span>
-        ${o.race ? `<span class="tag race">${ic("bolt")}race</span>` : ""}${o.source === "smspva" ? `<span class="tag">web</span>` : ""}
+        ${o.batch ? `<span class="tag batch" title="Order theo lô">${ic("bolt")}lô</span>` : ""}${o.source === "smspva" ? `<span class="tag">web</span>` : ""}
         ${o.status === "waiting" ? `<span class="timer ${low ? "low" : ""}">${mmss(o.remaining)}</span>` : ""}</div>
       <div class="oc-num"><span class="n" data-copy="${esc(o.number)}" title="Copy số (không mã vùng)"><span class="cc">+${esc(o.dial)}</span> ${esc(o.number)}</span>
         <button class="sm ghost" data-copy="+${esc(o.dial)}${esc(o.number)}" title="Copy kèm mã vùng">${ic("copy")}</button>
@@ -556,7 +618,7 @@ function renderOrders() {
 /* ---------------- services ---------------- */
 async function loadServices(force) {
   loadServices.busy = true;
-  try { const j = await api("/api/services" + (force ? "?force=1" : "")); services = j.services; renderServices(); updateSvcName(); }
+  try { const j = await api("/api/services" + (force ? "?force=1" : "")); services = j.services; renderServices(); updateSvcName(); renderTabs(); }
   catch (e) { $("slist").innerHTML = `<div class="empty-st">${ic("alert")}Lỗi: ${esc(e.message)}</div>`; }
   finally { loadServices.busy = false; }
 }
@@ -590,17 +652,59 @@ function openPicker() { $("picker").hidden = false; $("sFilter").value = ""; kbI
   if (!services.length || Date.now() / 1000 - (loadServices.ts || 0) > 60) { loadServices(); loadServices.ts = Date.now() / 1000; } }
 function closePicker() { $("picker").hidden = true; }
 function chooseService(code) {
-  if (code !== svcCode) { picked.clear(); selC = null; svc = null; }
-  svcCode = code; LS.set("service", code); updateSvcName(); closePicker(); loadService();
+  if (code !== svcCode) { selC = null; svc = svcCache.get(code) || null; $("cFilter").value = ""; }
+  svcCode = code; picked = pickFor(code); LS.set("service", code); addRecent(code); updateSvcName(); closePicker();
+  if (svc) renderService(); else { $("svcCard").hidden = true; $("cCard").hidden = true; }
+  renderTabs(); loadService();
+}
+function addRecent(code) {
+  if (!code || recent.includes(code)) return;
+  recent.push(code); if (recent.length > 12) recent = recent.slice(-12); LS.set("recent", recent);
+}
+function tabList() {  // gần đây + service đang tick + service có số đang chờ
+  const extra = [...allPicks().map(([s]) => s), ...(S && S.orders || []).filter(o => o.status === "waiting").map(o => o.service)];
+  return [...new Set([...recent, ...extra])].filter(Boolean);
+}
+let lastTabsHtml = "";
+function renderTabs() {
+  const l = tabList(), orders = S && S.orders || [];
+  $("stabs").hidden = !l.length;
+  const k = IS_MAC ? "⌥" : "Alt+";
+  const html = l.map((c, i) => {
+    const pk = picks.get(c)?.size || 0;
+    const wt = orders.filter(o => o.service === c && o.status === "waiting").length;
+    const ok = orders.filter(o => o.service === c && o.status === "sms").length;
+    const nm = svcLabel(c), cur = c === svcCode;
+    const busy = pk || wt;
+    return `<div class="stab ${cur ? "cur" : ""}" data-goto="${esc(c)}" role="tab" aria-selected="${cur}"
+      title="${esc(nm)} (${esc(c)})${i < 9 ? ` · ${k}${i + 1}` : ""}${pk ? ` · ${pk} country đã tick` : ""}${wt ? ` · ${wt} số đang chờ` : ""}${ok ? ` · ${ok} số có SMS` : ""}">
+      <span class="av">${esc(nm.trim().charAt(0).toUpperCase())}</span><span class="nm">${esc(nm)}</span>
+      ${pk ? `<span class="bd pk" title="Country đã tick">${pk}</span>` : ""}${wt ? `<span class="bd wt" title="Số đang chờ SMS">${wt}</span>` : ""}${ok ? `<span class="bd ok" title="Số đã có SMS">✓${ok}</span>` : ""}
+      ${cur || busy ? "" : `<span class="cl" data-close-tab="${esc(c)}" title="Đóng tab">${ic("x")}</span>`}</div>`;
+  }).join("") + `<button class="stab-add" data-open-picker title="Thêm service (${MOD_LABEL})">+ Service</button>
+    <span class="hint">${k}1–9 · <kbd>[</kbd> <kbd>]</kbd> chuyển tab</span>`;
+  if (html !== lastTabsHtml) {
+    $("stabs").innerHTML = html; lastTabsHtml = html;
+    const cur = $("stabs").querySelector(".stab.cur"); if (cur) cur.scrollIntoView({ block:"nearest", inline:"nearest" });
+  }
+}
+function switchTab(d) {  // d: số bước (+1/-1) hoặc {idx}
+  const l = tabList(); if (!l.length) return;
+  const i = typeof d === "object" ? d.idx : (l.indexOf(svcCode) + d + l.length) % l.length;
+  if (l[i] && l[i] !== svcCode) chooseService(l[i]);
 }
 
 /* ---------------- service detail / countries ---------------- */
 async function loadService(force) {
   if (!svcCode) return;
   if (!svc) $("countries").innerHTML = Array(8).fill(`<div class="skel"></div>`).join("");
-  try { svc = await api(`/api/service?code=${encodeURIComponent(svcCode)}${force ? "&force=1" : ""}`); }
-  catch (e) { $("countries").innerHTML = `<div class="empty-st">${ic("alert")}Lỗi: ${esc(e.message)}</div>`; return; }
-  renderService();
+  const code = svcCode;
+  let d;
+  try { d = await api(`/api/service?code=${encodeURIComponent(code)}${force ? "&force=1" : ""}`); }
+  catch (e) { if (code === svcCode) $("countries").innerHTML = `<div class="empty-st">${ic("alert")}Lỗi: ${esc(e.message)}</div>`; return; }
+  svcCache.set(code, d);
+  if (code !== svcCode) return;  // đã chuyển sang service khác trong lúc chờ
+  svc = d; renderService();
   if (force) toast("Đã cập nhật giá & số lượng");
 }
 function sortedCountries() {
@@ -623,6 +727,7 @@ function renderService() {
   const total = live.reduce((a, c) => a + (c.unlimited ? 0 : c.count), 0);
   $("svcStat").textContent = `${svc.countries.length} country hỗ trợ · ${live.some(c => c.unlimited) ? "kho lớn" : total.toLocaleString() + " số sẵn"}`;
   $("stLive").textContent = live.length; $("stMin").textContent = live.length ? money(mp) : "—";
+  for (const c of svc.countries) if (picked.has(c.code)) Object.assign(picked.get(c.code), { price:c.min_price, name:c.name });  // giá mới nhất
   const l = sortedCountries();
   $("cInfo").textContent = `${l.length} country`;
   $("countries").innerHTML = l.length ? l.map(c => {
@@ -634,12 +739,52 @@ function renderService() {
       <span class="nm"><b>${esc(c.name)}</b><span class="meta"><span class="mono">${esc(c.code)} · +${esc(c.dial)}</span>${h}</span></span>
       <span class="rt"><b>${money(c.min_price)}</b><br><span class="muted">${c.unlimited ? "∞" : c.count.toLocaleString()} số</span></span></div>`;
   }).join("") : `<div class="empty-st">${ic("globe")}Không có country nào${cfg.only ? " còn số" : ""}</div>`;
-  updateRaceBtn(); renderCountry();
+  updateOrderBtns(); renderCountry();
 }
-function updateRaceBtn() {
-  const b = $("btnRace"); b.innerHTML = `${ic("bolt")}Race ${picked.size} country`;
-  b.disabled = !picked.size || !!(S && S.job);
+const clampQ = v => Math.max(1, Math.min(50, parseInt(v, 10) || 1));
+const svcLabel = code => (services.find(x => x.code === code) || (svc && svc.code === code && svc) || {}).name || code;
+const allPicks = () => [...picks].filter(([, m]) => m.size);
+const pickOf = c => ({ price:c.min_price, qty:1, name:c.name, dial:c.dial });
+const sumOf = list => list.reduce((a, [, v]) => ({ n:a.n + v.qty, cost:a.cost + (v.price || 0) * v.qty }), { n:0, cost:0 });
+function updateOrderBtns() {
+  const t = sumOf([...picked]);
+  $("btnOrder").innerHTML = `${ic("bolt")}Order ${picked.size} country${t.n > picked.size ? ` · ${t.n} số` : ""}`;
+  $("btnOrder").disabled = !picked.size;
   $("stPick").textContent = picked.size;
+  renderSel(); renderTabs();
+}
+function renderSel() {
+  const all = allPicks();
+  $("selCard").hidden = !all.length; if (!all.length) return;
+  $("selBody").innerHTML = all.map(([s, m]) => {
+    const t = sumOf([...m]);
+    return `<tr class="grp ${s === svcCode ? "cur" : ""}"><td colspan="3"><span class="gname">${esc(svcLabel(s))}<span class="tag mono">${esc(s)}</span>
+        <span class="faint small" style="font-weight:500">${m.size} country</span></span></td>
+      <td class="r num"><b data-gsum="${esc(s)}">${money(t.cost)}</b></td>
+      <td><div class="gacts">${s === svcCode ? "" : `<button class="sm ghost" data-goto="${esc(s)}">Mở</button>`}
+        <button class="sm ghost" data-unpick-svc="${esc(s)}" title="Bỏ chọn cả service">${ic("x")}</button></div></td></tr>` +
+      [...m].map(([c, v]) => `<tr><td class="c">${flag(c)} <b>${esc(v.name || c)}</b> <span class="faint small mono">${esc(c)}${v.dial ? " · +" + esc(v.dial) : ""}</span></td>
+        <td class="r num">${money(v.price)}</td>
+        <td class="r"><input class="q" type="number" min="1" max="50" value="${v.qty}" data-q-svc="${esc(s)}" data-q-c="${esc(c)}"></td>
+        <td class="r num" data-rsum="${esc(s)}|${esc(c)}">${money((v.price || 0) * v.qty)}</td>
+        <td class="r"><button class="ghost x" data-unpick="${esc(s)}|${esc(c)}" title="Bỏ">${ic("x")}</button></td></tr>`).join("");
+  }).join("");
+  renderSelTotals();
+}
+function renderSelTotals() {
+  const all = allPicks(), t = sumOf(all.flatMap(([, m]) => [...m]));
+  $("selCount").textContent = all.reduce((a, [, m]) => a + m.size, 0);
+  $("selInfo").textContent = `${all.length} service`;
+  $("selTot").innerHTML = `Tổng <b>${t.n}</b> số · tối đa <b>${money(t.cost)}</b> nếu tất cả nhận SMS`;
+  $("btnOrderAll").innerHTML = `${ic("bolt")}Order tất cả · ${t.n} số`;
+  for (const [s, m] of all) { const g = document.querySelector(`[data-gsum="${CSS.escape(s)}"]`); if (g) g.textContent = money(sumOf([...m]).cost); }
+}
+async function orderPicks(list, label) {
+  list = list.map(([service, country, v]) => ({ service, country, price:v.price, qty:v.qty }));
+  const n = list.reduce((a, p) => a + p.qty, 0), max = list.reduce((a, p) => a + (p.price || 0) * p.qty, 0);
+  if (!confirm(`${label}: order ${n} số cùng lúc (${list.length} country)?\nKhông tự huỷ số nào — số không cần thì tự bấm Huỷ.\nNếu tất cả đều nhận SMS → tối đa ${money(max)}.`)) return;
+  document.title = TITLE;
+  await act("/api/batch", { picks:list }, `Đang order ${n} số…`);
 }
 function renderCountry() {
   const c = svc && svc.countries.find(x => x.code === selC);
@@ -674,11 +819,21 @@ document.addEventListener("click", async e => {
   if (fv) { e.stopPropagation(); const c = fv.dataset.fav; favs.has(c) ? favs.delete(c) : favs.add(c); LS.set("favs", [...favs]); return renderServices(); }
   const ss = t.closest("[data-ss]"); if (ss) { cfg.ssort = ss.dataset.ss; saveCfg(); return renderServices(); }
   const sv = t.closest("[data-svc]"); if (sv) return chooseService(sv.dataset.svc);
+  const us = t.closest("[data-unpick-svc]");
+  if (us) { pickFor(us.dataset.unpickSvc).clear(); return us.dataset.unpickSvc === svcCode ? renderService() : updateOrderBtns(); }
+  const up = t.closest("[data-unpick]");
+  if (up) { const [s, c] = up.dataset.unpick.split("|"); pickFor(s).delete(c); return s === svcCode ? renderService() : updateOrderBtns(); }
+  const ct = t.closest("[data-close-tab]");
+  if (ct) { e.stopPropagation(); recent = recent.filter(x => x !== ct.dataset.closeTab); LS.set("recent", recent); return renderTabs(); }
+  if (t.closest("[data-open-picker]")) return openPicker();
+  const go = t.closest("[data-goto]"); if (go) return chooseService(go.dataset.goto);
   const pk = t.closest("[data-pick]");
-  if (pk) { pk.checked ? picked.add(pk.dataset.pick) : picked.delete(pk.dataset.pick); return updateRaceBtn(); }
+  if (pk) { const c = svc.countries.find(x => x.code === pk.dataset.pick);
+    pk.checked ? picked.set(c.code, pickOf(c)) : picked.delete(c.code); return updateOrderBtns(); }
   const cr = t.closest("[data-c]"); if (cr) { selC = cr.dataset.c; renderService(); return; }
   const tp = t.closest("[data-top]");
-  if (tp) { picked = new Set(sortedCountries().filter(c => c.count > 0).slice(0, +tp.dataset.top).map(c => c.code)); return renderService(); }
+  if (tp) { picked.clear(); sortedCountries().filter(c => c.count > 0).slice(0, +tp.dataset.top).forEach(c => picked.set(c.code, picked.get(c.code) || pickOf(c)));
+    return renderService(); }
   if (t.closest("[data-cancel]")) return act("/api/cancel", { id:t.closest("[data-cancel]").dataset.cancel });
   if (t.closest("[data-block]")) { if (confirm("Block số này (báo số không dùng được)?")) act("/api/block", { id:t.closest("[data-block]").dataset.block }, "Đã block"); return; }
   const op = t.closest("[data-order-op]");
@@ -692,13 +847,25 @@ async function orderOne(country, operator, price) {
   if (j && !j.ok) toast("Không order được: " + j.error);
   else if (j) toast(`Đã order ${country} +${j.order.dial} ${j.order.number}`);
 }
-$("btnRace").onclick = () => {
-  const l = svc.countries.filter(c => picked.has(c.code));
-  const max = Math.max(...l.map(c => c.min_price || 0));
-  if (!confirm(`Race ${svc.name}: order ${l.length} số cùng lúc?\nSố đầu tiên nhận SMS thắng, các số khác tự huỷ.\nChỉ trả tiền số nhận SMS → tối đa ${money(max)}.`)) return;
-  document.title = TITLE;
-  act("/api/race", { service:svcCode, picks:l.map(c => ({ country:c.code, price:c.min_price })) }, `Đang order ${l.length} số…`);
+$("btnOrder").onclick = () => orderPicks([...picked].map(([c, v]) => [svcCode, c, v]), svc.name);
+$("btnOrderAll").onclick = () => { const all = allPicks();
+  orderPicks(all.flatMap(([s, m]) => [...m].map(([c, v]) => [s, c, v])), `${all.length} service`); };
+$("btnUnpickAll").onclick = () => { if (confirm("Bỏ chọn tất cả?")) { picks.forEach(m => m.clear()); renderService(); updateOrderBtns(); } };
+$("stabs").addEventListener("auxclick", e => {  // click chuột giữa = đóng tab
+  const tb = e.button === 1 && e.target.closest(".stab"); if (!tb || tb.querySelector("[data-close-tab]") === null) return;
+  tb.querySelector("[data-close-tab]").click();
+});
+$("selBody").oninput = e => {  // đổi SL từng dòng: chỉ cập nhật số liệu, không vẽ lại bảng (giữ focus ô đang gõ)
+  const q = e.target.closest("[data-q-svc]"); if (!q) return;
+  const v = pickFor(q.dataset.qSvc).get(q.dataset.qC); if (!v) return;
+  v.qty = clampQ(q.value);
+  const r = document.querySelector(`[data-rsum="${CSS.escape(q.dataset.qSvc + "|" + q.dataset.qC)}"]`); if (r) r.textContent = money((v.price || 0) * v.qty);
+  renderSelTotals(); if (q.dataset.qSvc === svcCode) { const t = sumOf([...picked]);
+    $("btnOrder").innerHTML = `${ic("bolt")}Order ${picked.size} country${t.n > picked.size ? ` · ${t.n} số` : ""}`; }
 };
+$("selBody").addEventListener("change", e => { if (e.target.matches("input.q")) e.target.value = clampQ(e.target.value); });
+$("qtyAll").onchange = () => { if (!$("qtyAll").value) return; const q = clampQ($("qtyAll").value);
+  picks.forEach(m => m.forEach(v => v.qty = q)); $("qtyAll").value = ""; updateOrderBtns(); };
 $("btnCheapest").onclick = () => {
   const c = svc.countries.filter(x => x.count > 0 && x.min_price != null).sort((a, b) => a.min_price - b.min_price)[0];
   if (!c) return toast("Không có country nào còn số");
@@ -725,8 +892,24 @@ $("sFilter").onkeydown = e => {
   if (e.key === "Escape") closePicker();
   const row = $("slist").children[kbIdx]; if (row && row.scrollIntoView) row.scrollIntoView({ block:"nearest" });
 };
+const IS_MAC = /mac|iphone|ipad|ipod/i.test(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent);
+const MOD_LABEL = IS_MAC ? "⌘K" : "Ctrl K";
+$("svcKbd").textContent = MOD_LABEL;
+$("svcBtn").title = `Chọn service (${IS_MAC ? "⌘K" : "Ctrl+K"} hoặc /)`;
 document.addEventListener("keydown", e => {
-  if (e.key === "/" && !["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement.tagName) && S && S.has_key) { e.preventDefault(); openPicker(); }
+  // Cmd+K trên macOS, Ctrl+K trên Windows/Linux — hoạt động cả khi đang gõ trong ô input
+  if (e.key.toLowerCase() === "k" && (IS_MAC ? e.metaKey && !e.ctrlKey : e.ctrlKey && !e.metaKey) && !e.altKey && !e.shiftKey
+      && S && S.has_key && $("keyCard").hidden) {
+    e.preventDefault();
+    if ($("picker").hidden) openPicker(); else closePicker();
+    return;
+  }
+  const typing = ["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement.tagName);
+  const ready = S && S.has_key && $("keyCard").hidden && $("picker").hidden;
+  // Alt/⌥ + 1..9: nhảy tới tab service thứ N (dùng e.code vì ⌥+số trên macOS ra ký tự đặc biệt)
+  if (ready && e.altKey && !e.ctrlKey && !e.metaKey && /^Digit[1-9]$/.test(e.code)) { e.preventDefault(); return switchTab({ idx:+e.code.slice(5) - 1 }); }
+  if (ready && !typing && !e.altKey && !e.ctrlKey && !e.metaKey && (e.key === "[" || e.key === "]")) { e.preventDefault(); return switchTab(e.key === "]" ? 1 : -1); }
+  if (e.key === "/" && !typing && S && S.has_key) { e.preventDefault(); openPicker(); }
   if (e.key === "Escape" && !$("picker").hidden) closePicker();
 });
 $("btnKey").onclick = async () => {
@@ -756,12 +939,12 @@ $("tNotify").onclick = async () => {
 $("cSort").value = cfg.sort; $("cOnly").checked = cfg.only; renderToggles();
 (async () => {
   await pollState();
-  if (S && S.has_key) { loadServices(); if (svcCode) loadService(); else openPicker(); }
+  if (S && S.has_key) { loadServices(); if (svcCode) { addRecent(svcCode); renderTabs(); loadService(); } else openPicker(); }
   else setTimeout(() => $("key").focus(), 50);
   loadCodes();
 })();
 setInterval(pollState, 2000);
-setInterval(() => { if (svcCode && S && S.has_key && !S.job && document.visibilityState === "visible") loadService(); }, 30000);
+setInterval(() => { if (svcCode && S && S.has_key && !S.jobs && document.visibilityState === "visible") loadService(); }, 30000);
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ SMSPVA Studio — local dashboard.
 
 - Danh sách TẤT CẢ service SMSPVA hỗ trợ (giá, số lượng, số country).
 - Chọn service -> thanh bên trái là các country còn số (giá, kho, operator, lịch sử OK).
-- Order 1 số, hoặc RACE nhiều country: số đầu tiên nhận SMS -> tự huỷ các số còn lại.
+- Order 1 số, hoặc order hàng loạt nhiều country × nhiều service song song (không bao giờ tự huỷ số).
 - Poll toàn bộ order bằng 1 request /activation/orders mỗi 3s (kể cả order tạo trên web SMSPVA).
 Server chỉ nghe 127.0.0.1, API key chỉ giữ trong RAM.
 """
@@ -30,7 +30,8 @@ SERVICES_TTL = 60      # SMSPVA cache count 60s
 SERVICE_TTL = 30
 POLL_ACTIVE = 3        # giây giữa các lần poll khi có order đang chờ
 POLL_IDLE = 20         # khi không có order (để phát hiện order tạo trên web SMSPVA)
-RACE_WORKERS = 5
+BATCH_WORKERS = 5      # số request mua số song song trong 1 lô
+MAX_QTY = 50           # số lượng tối đa mỗi country trong 1 lô
 
 
 class Busy(Exception):
@@ -47,9 +48,8 @@ class App:
         self.services_ts = 0.0
         self.svc_cache = {}
         self.orders = {}
-        self.races = {}  # race_id -> {"service":..., "stop": Event, "winner": id}
         self.logs = deque(maxlen=300)
-        self.job = None
+        self.jobs = 0  # số lô order đang chạy (nhiều lô chạy song song được)
         self._seen_raw = {}
         threading.Thread(target=self._poller, daemon=True).start()
 
@@ -201,28 +201,25 @@ class App:
 
     # ---------- order ----------
     def _new_order(self, oid, service, country, number, expire_in, price=None, operator=None,
-                   race=None, dial=None, source="dashboard"):
+                   batch=None, dial=None, source="dashboard"):
         now = time.time()
         return {"id": str(oid), "service": service, "sname": self.service_name(service),
                 "country": country, "cname": sp.country_name(country), "dial": dial or sp.country_dial(country),
-                "number": str(number), "price": price, "operator": operator, "race": race,
+                "number": str(number), "price": price, "operator": operator, "batch": batch,
                 "status": "waiting", "note": "", "sms": None, "sms_text": None, "source": source,
                 "ordered_at": now, "expires_at": now + (expire_in or 600)}
 
-    def order(self, service, country, operator=None, price=None, race=None):
+    def order(self, service, country, operator=None, price=None, batch=None):
         api = self.need_api()
         r = api.get_number(country, service, operator)
         if r.ok and isinstance(r.data, dict) and r.data.get("orderId"):
             d = r.data
             o = self._new_order(d["orderId"], service, country, d.get("phoneNumber"),
-                                sp.to_int(d.get("orderExpireIn"), 600), price, operator, race)
+                                sp.to_int(d.get("orderExpireIn"), 600), price, operator, batch)
             with self.lock:
                 self.orders[o["id"]] = o
             self.log(f"+ {o['sname']} · {country} +{o['dial']} {o['number']}" + (f" ({price}$)" if price else ""))
             sp.save({"event": "ordered", **o})
-            rc = self.races.get(race)
-            if rc and rc["stop"].is_set():  # race đã có người thắng trong lúc đang order
-                self._cancel(o, "auto")
             return {"ok": True, "order": o}
         if r.status == 0:
             self.log(f"{country}: lỗi mạng khi mua số ({r.edesc}) — sẽ tự kiểm tra danh sách order")
@@ -230,41 +227,40 @@ class App:
             self.log(f"{country} {service}: không order được · {r.err()}")
         return {"ok": False, "error": r.err(), "type": r.etype}
 
-    def race(self, service, picks):
-        """picks: [{"country":..,"price":..}] — order song song, số đầu tiên nhận SMS thắng."""
+    def batch(self, picks, qty=1):
+        """picks: [{"service":..,"country":..,"price":..}] — order song song, có thể trộn nhiều service.
+        Mỗi pick order p["qty"] số (mặc định `qty`). Không tự huỷ số nào: số nào không cần thì người dùng tự bấm Huỷ.
+        Nhiều lô có thể chạy cùng lúc."""
+        picks = [p for p in picks or [] if p.get("service") and p.get("country")]
         if not picks:
             raise ValueError("Chưa chọn country nào")
-        rid = f"r{int(time.time() * 1000)}"
-        stop = threading.Event()
+        qty = max(1, min(sp.to_int(qty, 1) or 1, MAX_QTY))
+        bid = f"b{int(time.time() * 1000)}"
         with self.lock:
-            if self.job:
-                raise Busy(f"Đang {self.job}")
-            self.job = "race"
-            self.races[rid] = {"service": service, "stop": stop, "winner": None}
+            self.jobs += 1
 
         def run():
             try:
-                self.log(f"⚡ Race {self.service_name(service)}: {len(picks)} country")
+                svcs = list(dict.fromkeys(p["service"] for p in picks))
+                self.log(f"⚡ Order {len(picks)} country · {len(svcs)} service: "
+                         + ", ".join(self.service_name(s) for s in svcs))
                 bal = self.balance or 0
-                todo = [p for p in picks if not p.get("price") or not bal or p["price"] <= bal]
-                with ThreadPoolExecutor(RACE_WORKERS) as ex:
-                    res = list(ex.map(lambda p: self._race_one(service, p, rid, stop), todo))
+                todo = [p for p in picks for _ in range(max(1, min(sp.to_int(p.get("qty"), qty) or 1, MAX_QTY)))
+                        if not p.get("price") or not bal or p["price"] <= bal]
+                with ThreadPoolExecutor(BATCH_WORKERS) as ex:
+                    res = list(ex.map(lambda p: self.order(p["service"], p["country"], p.get("operator"),
+                                                           p.get("price"), bid), todo))
                 n = sum(1 for x in res if x and x.get("ok"))
-                self.log(f"⚡ Race: order được {n}/{len(todo)} số · chỉ trả tiền số nhận SMS")
+                self.log(f"⚡ Lô {bid}: order được {n}/{len(todo)} số")
                 self.refresh_user()
             except Exception as e:
-                self.log(f"LỖI race: {e}")
+                self.log(f"LỖI order lô: {e}")
             finally:
                 with self.lock:
-                    self.job = None
+                    self.jobs -= 1
 
         threading.Thread(target=run, daemon=True).start()
-        return rid
-
-    def _race_one(self, service, p, rid, stop):
-        if stop.is_set():
-            return None
-        return self.order(service, p["country"], None, p.get("price"), rid)
+        return bid
 
     # ---------- huỷ / block ----------
     def _cancel(self, o, reason="manual"):
@@ -298,10 +294,8 @@ class App:
             o["note"] = f"block lỗi: {r.err()}"
 
     def cancel_all(self):
-        for rc in self.races.values():
-            rc["stop"].set()
         lst = [o for o in self.orders.values() if o["status"] == "waiting"]
-        with ThreadPoolExecutor(RACE_WORKERS) as ex:
+        with ThreadPoolExecutor(BATCH_WORKERS) as ex:
             list(ex.map(lambda o: self._cancel(o, "manual_all"), lst))
         if lst:
             self.log(f"Đã huỷ {len(lst)} số")
@@ -317,15 +311,6 @@ class App:
         o.update(status="sms", sms=sp.extract_code(code, full), sms_text=full or code, sms_at=time.time(), note="")
         self.log(f"✅ SMS {o['sname']} · {o['country']} +{o['dial']} {o['number']}: {o['sms']}")
         sp.save({"event": "sms", **o})
-        rc = self.races.get(o.get("race"))
-        if rc and not rc["winner"]:
-            rc["winner"] = o["id"]
-            rc["stop"].set()
-            others = [x for x in self.orders.values() if x.get("race") == o["race"] and x["status"] == "waiting"]
-            if others:
-                self.log(f"Race thắng → huỷ {len(others)} số còn lại")
-                with ThreadPoolExecutor(RACE_WORKERS) as ex:
-                    list(ex.map(lambda x: self._cancel(x, "auto"), others))
         self.bg("balance", self.refresh_user)
 
     def _read_sms(self, o):
@@ -411,7 +396,7 @@ class App:
             out = [dict(o, remaining=max(0, int(o["expires_at"] - now))) for o in orders]
         return {"has_key": bool(self.api), "mode": self.api.mode if self.api else None, "balance": self.balance,
                 "karma": self.user.get("karma"), "user": self.user.get("name") or self.user.get("login"),
-                "job": self.job, "orders": out,
+                "jobs": self.jobs, "orders": out,
                 "waiting": sum(1 for o in out if o["status"] == "waiting"),
                 "logs": list(self.logs)[-120:]}
 
@@ -481,7 +466,7 @@ class Handler(BaseHTTPRequestHandler):
         routes = {
             "/api/key": lambda: app.set_key(b.get("key")) or {"ok": True},
             "/api/order": lambda: app.order(b["service"], b["country"], b.get("operator"), b.get("price")),
-            "/api/race": lambda: {"race": app.race(b["service"], b["picks"])},
+            "/api/batch": lambda: {"batch": app.batch(b["picks"], b.get("qty", 1))},
             "/api/cancel": lambda: app.cancel(str(b["id"])) or {"ok": True},
             "/api/block": lambda: app.block(str(b["id"])) or {"ok": True},
             "/api/cancel-all": lambda: app.cancel_all() or {"ok": True},
@@ -502,9 +487,7 @@ def main():
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
-        print()
-        if app.api:
-            app.cancel_all()
+        print()  # không huỷ số đang chờ — chạy lại server sẽ tự nhận lại qua /activation/orders
 
 
 if __name__ == "__main__":

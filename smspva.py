@@ -384,7 +384,7 @@ def read_history():
 def stats(rows=None):
     """{(service, country): [ok, fail]}.
     ok = nhận được SMS; fail = hết hạn / bạn tự huỷ 1 số / block số.
-    Bị huỷ tự động vì số khác trong race đã nhận SMS -> không tính."""
+    Huỷ hàng loạt ("Huỷ tất cả") hoặc huỷ tự động từ bản cũ (race) -> không tính."""
     final = {}
     for r in rows if rows is not None else read_history():
         key = (r.get("id"), r.get("service") or LEGACY_SERVICE, r.get("country"))
